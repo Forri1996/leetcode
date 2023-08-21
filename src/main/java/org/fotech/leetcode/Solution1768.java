@@ -1,4 +1,4 @@
-package org.fotech.stringandarr;
+package org.fotech.leetcode;
 
 /**
  * 给你两个字符串 word1 和 word2 。

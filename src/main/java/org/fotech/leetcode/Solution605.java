@@ -1,4 +1,4 @@
-package org.fotech.stringandarr;
+package org.fotech.leetcode;
 
 /**
  * 假设有一个很长的花坛，一部分地块种植了花，另一部分却没有。
