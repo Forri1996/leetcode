@@ -25,6 +25,7 @@ package org.fotech.leetcode;
  * 输入：numbers = [-1,0], target = -1
  * 输出：[1,2]
  * 解释：-1 与 0 之和等于目标数 -1 。因此 index1 = 1, index2 = 2 。返回 [1, 2] 。
+ *
  */
 public class Solution167 {
     public int[] twoSum(int[] numbers, int target) {
