@@ -13,7 +13,6 @@ import java.util.Arrays;
  *
  * 给你两个字符串，word1 和 word2 。如果 word1 和 word2 接近 ，就返回 true ；否则，返回 false 。
  *
- *
  */
 public class Solution1657 {
     public boolean closeStrings(String word1, String word2) {

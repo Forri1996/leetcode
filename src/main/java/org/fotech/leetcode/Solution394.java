@@ -65,14 +65,18 @@ public class Solution394 {
                     int repeatNum = 0;
                     while (true) {
                         String stackItem = stack.pop();
-                        //
+                        // 如果碰到数字说明结束了
                         if (isNumeric(stackItem)) {
                             // 在来个循环获取数字。
                             repeatNum = getRepNum(stackItem, stack);
                             break;
                         }
                         if (!stackItem.equals("[")) {
-                            sbItem.append(stackItem);
+
+                            for (int l = stackItem.length() - 1; l >=0; l--) {
+                                sbItem.append(stackItem.charAt(l));
+                            }
+
                         }
                     }
                     sbItem.reverse();
