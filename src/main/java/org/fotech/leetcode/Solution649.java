@@ -19,6 +19,7 @@ public class Solution649 {
         while (!queD.isEmpty() && !queR.isEmpty()) {
             int rIndex = queR.poll();
             int dIndex = queD.poll();
+            // 先投票的可以放到队尾，继续投票,后投票的被poll
             if (rIndex < dIndex) {
                 queR.offer(rIndex + senate.length());
             } else {
