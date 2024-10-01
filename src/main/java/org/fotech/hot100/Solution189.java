@@ -1,12 +1,12 @@
 package org.fotech.hot100;
 
 public class Solution189 {
-    public int[] lunzhuan(int[] input, int k) {
-        int m = k % input.length;
-        for (int i = 0; i < m; i++) {
-            change(input, m-1- i, input.length - i - 1);
+    public void lunzhuan(int[] input, int k) {
+        int[] newArr = new int[input.length];
+        for (int i = 0; i < input.length; i++) {
+            newArr[(i+k)%input.length] = input[i];
         }
-        return input;
+        System.arraycopy(newArr,0, input, 0, input.length);
     }
 
     public void change(int[] m, int left, int right) {
@@ -16,7 +16,7 @@ public class Solution189 {
     }
     public static void main(String[] args) {
         Solution189 testComboInTacheSupporter = new Solution189();
-        int[] input = new int[]{1,2,3,4,5,6};
-        System.out.println(testComboInTacheSupporter.lunzhuan(input, 3).toString());
+        int[] input = new int[]{1,2,3,4,5,6,7};
+        testComboInTacheSupporter.lunzhuan(input, 3);
     }
 }
