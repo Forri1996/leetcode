@@ -2,6 +2,9 @@ package org.fotech.hot100;
 
 import org.fotech.LinkNode;
 
+/**
+ * 链表形式的两数相加
+ */
 public class Solution2 {
     private LinkNode add(LinkNode l1, LinkNode l2) {
         LinkNode head = null;
