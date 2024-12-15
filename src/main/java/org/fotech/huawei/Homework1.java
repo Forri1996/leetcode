@@ -1,7 +1,9 @@
 package org.fotech.huawei;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
+import java.util.Scanner;
 
 /**
  * 让我们来模拟一个工作队列的运作，有一个任务提交者和若干任务执行者，执行者从1开始编号
@@ -40,9 +42,15 @@ import java.util.PriorityQueue;
  */
 public class Homework1 {
     public static void main(String[] args) {
-        int[] nums = new int[] { 1, 3, 2, 2, 3, 3};
-        int execNum = 2;
-        int workQueueSize = 3;
+        Scanner sc = new Scanner(System.in);
+        int[] nums = Arrays.stream(sc.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int[] config = Arrays.stream(sc.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int execNum = config[0];
+        int workQueueSize = config[1];
+
+//        int[] nums = new int[] { 1, 3, 2, 2, 3, 3};
+//        int execNum = 2;
+//        int workQueueSize = 3;
         int[] res = doJob(execNum, nums, workQueueSize);
         System.out.println(res);
     }
