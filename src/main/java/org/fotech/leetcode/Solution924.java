@@ -1,7 +1,7 @@
 package org.fotech.leetcode;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
 
 /**
  * 题目名称
@@ -22,12 +22,24 @@ import java.util.List;
  */
 public class Solution924 {
     public static void main(String[] args) {
+
+        Queue<Integer> quee = new ArrayDeque<>();
+        quee.offer(1);
+        quee.offer(1);
+        quee.offer(1);
+        System.out.println(quee.size());
+
+
         int[][] input = {{1,1,0},{1,1,0},{0,0,1}};
-        int[] initial = {0,1};
+        int[] initial = {0,1,2};
+        System.out.println(minMalwareSpread(input, initial));;
+    }
+
+    public static int minMalwareSpread(int[][] input, int[] initial) {
         // 构建邻接表
-        List<List<Integer>> linjie = new ArrayList<>();
+        List<Set<Integer>> linjie = new ArrayList<>();
         for (int i =0; i < input.length; i++) {
-            linjie.add(new ArrayList<>());
+            linjie.add(new HashSet<>());
         }
         for (int i =0; i < input.length; i++) {
             for (int j = 0; j < input[0].length; j++) {
@@ -39,9 +51,42 @@ public class Solution924 {
         }
         // 已经感染的节点
         // 循环感染节点
+        // 当感染节点数更小的时候，去掉的病毒节点
+        int minItem = 0;
+        int total = Integer.MAX_VALUE;
         for (int removed : initial) {
+            // 已经感染的节点，默认是false
             boolean[] ganranNode = new boolean[input[0].length];
-//            int num = cal(removed, initial,linjie);
+            Queue<Integer> queue = new ArrayDeque<>();
+            // 广度优先算法，计算除掉removed后，剩下的init可以感染的总数
+            int sum = 0;
+            for (int ganran : initial) {
+                if (ganran == removed) {
+                    continue;
+                }
+                queue.offer(ganran);
+
+                while (!queue.isEmpty()) {
+                    int node = queue.poll();
+                    // 感染node节点，以及node节点的临界节点
+                    // 如果已经被感染了就跳过
+                    if (node == removed || ganranNode[node] == true) {
+                        continue;
+                    } else {
+                        // 感染一个节点，数量加1
+                        ganranNode[node] = true;
+                        sum++;
+                        linjie.get(node).forEach(queue::add);
+                    }
+                }
+                if (sum < total) {
+                    total = sum;
+                    minItem = removed;
+                }
+            }
         }
+        return minItem;
     }
+
+
 }
