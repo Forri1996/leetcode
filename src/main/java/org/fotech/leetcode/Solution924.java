@@ -18,7 +18,9 @@ import java.util.*;
  * 解释：如果移除节点 0，只有节点 1 会被感染；如果移除节点 1，节点 0 会被感染；所以移除节点 0 更好，因为节点 0 的编号更小。
  *
  * 1、构建邻接表。即一个List<List<Integer>> 表示每个节点相邻的节点
- * 2、使用bfs计算移除一个节点后
+ * 2、使用bfs计算要remove的节点
+ *
+ * <a href="https://www.doubao.com/chat/488427173134594">...</a>
  */
 public class Solution924 {
     public static void main(String[] args) {
