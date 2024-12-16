@@ -21,4 +21,22 @@ package org.fotech.leetcode;
  * 解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。
  */
 public class Solution152 {
+    /**
+     * 记录已i为结尾的子数组的最大值即可
+     * @param args
+     */
+    public static void main(String[] args) {
+        int[] nums = {2,3,-2,4};
+        int[] dpMax = new int[nums.length];
+        int[] dpMin = new int[nums.length];
+        dpMax[0] = nums[0];
+        dpMin[0] = nums[0];
+        for (int i = 1; i< nums.length; i++) {
+            dpMax[i] = Math.max(nums[i], Math.max(dpMax[i-1] * nums[i], dpMin[i-1]*nums[i]));
+            dpMin[i] = Math.min(nums[i], Math.min(dpMax[i-1] * nums[i], dpMin[i-1]*nums[i]));
+        }
+
+        System.out.println(dpMax);
+        System.out.println(dpMin);
+    }
 }
