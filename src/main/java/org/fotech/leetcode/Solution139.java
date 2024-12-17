@@ -25,4 +25,32 @@ package org.fotech.leetcode;
  *
  */
 public class Solution139 {
+    public static void main(String[] args) {
+        String s = "catsandog";
+        String[] wordDict = {"cats", "dog", "sand", "and", "cat"};
+
+        /**
+         * m是单词的长度
+         * dp[i] dp[i-m] == true && s.str分割长度=m 或者整个就是一个单词
+         */
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true;
+        for (int i = 1; i <= s.length(); i++) {
+            for (String word : wordDict) {
+                int wordLen = word.length();
+
+                if (s.substring(0, i).equals(word)) {
+                    dp[i] = true;
+                    break;
+                }
+
+
+                if (i-wordLen > 0 && dp[i - wordLen] && s.substring(i-wordLen, i).equals(word)) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        System.out.println(dp[s.length()]);
+    }
 }
