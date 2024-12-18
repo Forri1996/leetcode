@@ -22,6 +22,36 @@ package org.fotech.leetcode;
  *
  * 输入：target = 11, nums = [1,1,1,1,1,1,1,1]
  * 输出：0
+ *
+ * 滑动窗口，滑到left=right=length的时候返回结果
  */
 public class Solution209 {
+    public static void main(String[] args) {
+        int target = 11;
+        int[] nums = {1,1,1,1,1,1,1,1};
+        int left = 0;
+        int right = 0;
+        int minSize = 0;
+        while (left <= right && left < nums.length) {
+            int sum = 0;
+            for (int i = left; i <= right; i++) {
+                sum += nums[i];
+            }
+            if (sum < target) {
+                if (right < nums.length-1) {
+                    right++;
+                } else {
+                    left++;
+                }
+            } else {
+                if (minSize == 0) {
+                    minSize = right-left+1;
+                } else {
+                    minSize = Math.min(minSize, right-left+1);
+                }
+                left++;
+            }
+        }
+        System.out.println(minSize);
+    }
 }
