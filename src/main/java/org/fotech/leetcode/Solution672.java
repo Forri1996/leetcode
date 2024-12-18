@@ -1,5 +1,10 @@
 package org.fotech.leetcode;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * 房间中有 n 只已经打开的灯泡，编号从 1 到 n 。墙上挂着 4 个开关 。
  *
@@ -41,4 +46,113 @@ package org.fotech.leetcode;
  * - 按压开关 4 ，[关, 开, 开]
  */
 public class Solution672 {
+    public static void main(String[] args) {
+        int n = 3;
+        int press = 1;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            sb.append("1");
+        }
+        Set<String> result = new HashSet<>();
+        List<Integer> curr = new ArrayList<>();
+        generateCombinations(result, curr,0, n, press, sb.toString());
+        System.out.println(result);
+        System.out.println(curr);
+    }
+    private static void generateCombinations(Set<String> result, List<Integer> currentCombination, int start, int n, int m, String str) {
+        if (m == 0) {
+            for (int i : currentCombination) {
+                result.add(execByNum(i, str));
+            }
+            return;
+        }
+
+        for (int i = start; i <= n; i++) {
+            currentCombination.add(i);
+            generateCombinations(result, currentCombination, i + 1, n, m - 1, str);
+            currentCombination.remove(currentCombination.size() - 1);
+        }
+    }
+    private static String execByNum(int i, String light) {
+        if (i % 4 == 0) {
+            return trigger1(light);
+        }
+        if (i % 4 == 1) {
+            return trigger2(light);
+        }
+        if (i % 4 == 2) {
+            return trigger3(light);
+        }
+        if (i % 4 == 3) {
+            return trigger4(light);
+        }
+        return "";
+    }
+
+    private static String trigger1(String light) {
+        StringBuilder sb =new StringBuilder();
+        for (int i = 0; i < light.length(); i++) {
+            if (light.charAt(i) == '0') {
+                sb.append("1");
+            } else {
+                sb.append("0");
+            }
+        }
+
+        return sb.toString();
+    }
+
+    private static String trigger2(String light) {
+        StringBuilder sb =new StringBuilder();
+        for (int i = 0; i < light.length(); i++) {
+            if (i % 2 == 0) {
+                if (light.charAt(i) == '0') {
+                    sb.append("1");
+                } else {
+                    sb.append("0");
+                }
+            } else {
+                sb.append(light.charAt(i));
+            }
+
+        }
+
+        return sb.toString();
+    }
+
+    private static String trigger3(String light) {
+        StringBuilder sb =new StringBuilder();
+        for (int i = 0; i < light.length(); i++) {
+            if (i % 2 == 1) {
+                if (light.charAt(i) == '0') {
+                    sb.append("1");
+                } else {
+                    sb.append("0");
+                }
+            } else {
+                sb.append(light.charAt(i));
+            }
+
+        }
+
+        return sb.toString();
+    }
+
+    private static String trigger4(String light) {
+        StringBuilder sb =new StringBuilder();
+        for (int i = 0 ; i < light.length(); i++) {
+            if ((i)%3 == 0) {
+                if (light.charAt(i) == '0') {
+                    sb.append("1");
+                } else {
+                    sb.append("0");
+                }
+            } else {
+                sb.append(light.charAt(i));
+            }
+
+        }
+
+        return sb.toString();
+    }
 }
