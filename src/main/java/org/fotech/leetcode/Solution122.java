@@ -29,4 +29,21 @@ package org.fotech.leetcode;
  * 解释：在这种情况下, 交易无法获得正利润，所以不参与交易可以获得最大利润，最大利润为 0。
  */
 public class Solution122 {
+
+    public static void main(String[] args) {
+        Solution122 solution122 = new Solution122();
+        int[] input = {7,1,5,3,6,4};
+        System.out.println(solution122.calcate(input));
+    }
+
+    public int calcate(int[] prices) {
+        int amount = 0;
+        for (int i = 0; i < prices.length-1; i++) {
+            if (prices[i+1] - prices[i] > 0) {
+                amount+=prices[i+1] - prices[i];
+            }
+        }
+
+        return amount;
+    }
 }
