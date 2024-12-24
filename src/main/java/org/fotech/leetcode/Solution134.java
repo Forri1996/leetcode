@@ -34,4 +34,45 @@ package org.fotech.leetcode;
  * 因此，无论怎样，你都不可能绕环路行驶一周。
  */
 public class Solution134 {
+    public static void main(String[] args) {
+        Solution134 solution134 = new Solution134();
+        System.out.println(solution134.calcute());
+    }
+    public  int calcute() {
+        int[] gas = {1,2,3,4,5};
+        int[] cost = {3,4,5,1,2};
+        // 找起点
+        for (int i = 0; i < gas.length; i++) {
+            if (gas[i] >= cost[i]) {
+                // 找到起点，判断能否绕一圈
+                if (canCircle(i, gas, cost)) {
+                    return i;
+                }
+            }
+        }
+
+        return -1;
+    }
+
+    // 从i出发能否绕行一周
+    private boolean canCircle(int start, int[] gas, int[] cost) {
+        int remain = gas[start] - cost[start];
+        int remainGas = 0;
+        for (int i = 1; i < gas.length; i++) {
+            int pos = i + start;
+            if (pos >=gas.length) {
+                pos = pos - gas.length;
+            }
+            if (i == 1) {
+                remainGas = remain + gas[pos] - cost[pos];
+            } else {
+                remainGas = remainGas + gas[pos] - cost[pos];
+
+            }
+            if (remainGas < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
