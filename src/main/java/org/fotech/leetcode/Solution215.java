@@ -31,4 +31,32 @@ package org.fotech.leetcode;
  *
  */
 public class Solution215 {
+    // 核心是利用快排。这边不单独实现了。
+    public int findKthLargest(int[] nums, int k) {
+        // 快速排序
+        return quickSelect(nums, 0, nums.length-1, k);
+    }
+
+    // 寻找left～right区间中，第k大的那个
+    public int quickSelect(int[] nums, int left, int right, int k) {
+        if(left == right) return nums[k];
+
+        int x = nums[left];
+        int i = left - 1;
+        int j = right + 1;
+        do {
+            i++;
+        } while (nums[i] < x);
+
+        do {
+            j--;
+        } while (nums[j] > x);
+        if (i < j) {
+            int tmp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = tmp;
+        }
+        if (k <= j) return quickSelect(nums, left, j, k);
+        return quickSelect(nums, j+1, right, k);
+    }
 }

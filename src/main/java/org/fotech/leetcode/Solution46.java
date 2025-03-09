@@ -34,17 +34,19 @@ public class Solution46 {
         return result;
     }
 
-    private void backtrack(List<List<Integer>> result, List<Integer> item, int[] nums) {
-        if (item.size() == nums.length) {
-            result.add(new ArrayList<>(item));
-        } else {
-            for (int i = 0; i < nums.length; i++) {
-                if (!item.contains(nums[i])) {
-                    item.add(nums[i]);
-                    backtrack(result, item, nums);
-                    item.remove(item.size() - 1);
-                }
+    private void backtrack(List<List<Integer>> result, List<Integer> objects, int[] nums) {
+        if (objects.size() == nums.length) {
+            result.add(objects);
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (!objects.contains(nums[i])) {
+                objects.add(nums[i]);
+                backtrack(result, objects, nums);
+                objects.remove(objects.size() - 1);
             }
         }
     }
+
+
 }

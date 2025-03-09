@@ -35,24 +35,21 @@ public class Solution200 {
     return result;
     }
 
-    /**
-     * 从陆地的一角进来，把这块陆地全部设置成0
-     * @param grid
-     * @param i 横向
-     * @param j 竖项
-     */
-    private void dfs(char[][] grid, int i, int j) {
-        // 边界情况
-        if (i < 0 || i > grid.length || j < 0 || j > grid[0].length) {
+    private void dfs(char[][] grid, int i, int j){
+        // 没有超出范围
+        if (i < 0 || i > grid.length) {
+            return;
+        }
+        if (j < 0 || j > grid[0].length) {
             return;
         }
         if (grid[i][j] == '0') {
             return;
         }
         grid[i][j] = '0';
-        dfs(grid, i, j + 1);
-        dfs(grid, i, j - 1);
-        dfs(grid, i + 1, j);
-        dfs(grid, i - 1, j);
+        dfs(grid, i-1, j);
+        dfs(grid, i+1, j);
+        dfs(grid, i-1, j-1);
+        dfs(grid, i-1, j+1);
     }
 }
